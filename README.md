@@ -1,6 +1,6 @@
 ## REST API With Express Server
 
-<img src="public/images/express.png">
+<img src="public/images/express.jpg">
 
 This is our first REST API  React js Apps
 
