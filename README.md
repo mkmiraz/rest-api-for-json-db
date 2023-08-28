@@ -1,8 +1,7 @@
-## REST API With Express Server
-```html
-    <img src="public/images/express.jpg">
+<img src="public/images/express.jpg">
 
-```
+## REST API With Express Server
+
 This is our first REST API  React js Apps
 
 ## Fist Clone Repo and then install packages
