@@ -48,6 +48,27 @@ const createUser = (req, res) => {
 }
 
 
+/**
+ * @desc get Single user
+ * @name GET /api/v1/user/:id
+ * @access public
+ */
+
+const singleUser = (req, res) => {
+    // get users data form json data
+    const users = JSON.parse(readFileSync(path.join(__dirname, '../db/users.json')));
+    // get single user
+    const singleUser = users.find(data => data.id == req.params.id);
+
+    if (singleUser) {
+        res.status(200).json(singleUser);
+    } else {
+        res.status(404).json({
+            message: 'Single User data not found'
+        })
+    }
+
+}
 
 
 
@@ -64,5 +85,6 @@ const createUser = (req, res) => {
 // export 
 module.exports = {
     getAllUsers,
-    createUser
+    createUser,
+    singleUser
 }
