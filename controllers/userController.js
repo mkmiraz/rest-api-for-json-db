@@ -70,12 +70,60 @@ const singleUser = (req, res) => {
 
 }
 
+/**
+ * @desc delete user
+ * @name DELETE /api/v1/user/:id
+ * @access public
+ */
+
+const deleteUser = (req, res) => {
+    const users = JSON.parse(readFileSync(path.join(__dirname, '../db/users.json')));
+
+    if (users.some(data => data.id == req.params.id)) {
+
+        const data = users.filter(data => data.id != req.params.id);
+
+        writeFileSync(path.join(__dirname, '../db/users.json'), JSON.stringify(data));
+
+        res.status(200).json({
+            message: "user deleted successfully"
+        })
+    } else {
+        res.status(404).json({
+            message: "user not found"
+        })
+    }
+}
+
+/**
+ * @desc Update user
+ * @name PUT/PATCH /api/v1/user/:id
+ * @access public
+ */
+
+const updateuser = (req, res) => {
+    const users = JSON.parse(readFileSync(path.join(__dirname, '../db/users.json')));
+
+    if (users.some(data => data.id == req.params.id)) {
+
+        users[users.findIndex(data => data.id == req.params.id)] = {
+            ...users[users.findIndex(data => data.id == req.params.id)],
+            ...req.body
+        }
+
+        writeFileSync(path.join(__dirname, '../db/users.json'), JSON.stringify(users));
+        res.status(200).json({
+            message: "User Data Update Success"
+        })
+
+    } else {
+        res.status(404).json({
+            message: "user not found"
+        })
+    }
 
 
-
-
-
-
+}
 
 
 
@@ -86,5 +134,7 @@ const singleUser = (req, res) => {
 module.exports = {
     getAllUsers,
     createUser,
-    singleUser
+    singleUser,
+    deleteUser,
+    updateuser
 }
